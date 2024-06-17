@@ -72,10 +72,11 @@ jobs:
       - run: npm install
       - run: ${{ env.NODE_BUILD_CMD }}
       - run: ${{ env.NO_V18_NODE_BUILD_CMD }}
-      - if: matrix.os == 'windows-2019'
-        run: |
-          ${{ env.NODE_BUILD_CMD }}
       - name: Archive prebuilds
+        if: ${{ startsWith(matrix.os, 'windows') }}
+        run: tar -czf prebuilds-${{ matrix.os }}.tar.gz ".\\prebuilds\\"
+      - name: Archive prebuilds
+        if: ${{ !startsWith(matrix.os, 'windows') }}
         run: tar -czf prebuilds-${{ matrix.os }}.tar.gz prebuilds/
       - name: Upload prebuilds
         uses: actions/upload-artifact@v3
@@ -88,7 +89,6 @@ jobs:
       fail-fast: false
       matrix:
         arch:
-          - arm/v7
           - arm64
     name: Prebuild on Linux (${{ matrix.arch }})
     runs-on: ubuntu-latest
@@ -130,7 +130,6 @@ jobs:
           tar -xzf prebuilds/prebuilds-macos-latest.tar.gz -C ./
           tar -xzf prebuilds/prebuilds-macos-14.tar.gz -C ./
           tar -xzf prebuilds/prebuilds-windows-2019.tar.gz -C ./
-          tar -xzf prebuilds/prebuilds-linux-arm/v7.tar.gz -C ./
           tar -xzf prebuilds/prebuilds-linux-arm/arm64.tar.gz -C ./
       - run: npm publish
         env:
