@@ -7,9 +7,7 @@ on:
   workflow_dispatch: {}
 
 env:
-  NODE_BUILD_CMD: npx --no-install prebuildify --napi --strip --targets 18.0.0,20.0.0,22.0.0
-  NO_V18_NODE_BUILD_CMD: npx --no-install prebuildify --napi --strip --targets 20.0.0,22.0.0
-  ELECTRON_BUILD_CMD: npx --no-install prebuildify --napi --strip --targets 26.0.0,27.0.0,28.0.0,29.0.0,30.0.0,31.0.0
+  NODE_BUILD_CMD: prebuildify --napi --strip --targets 18.0.0,20.0.0,22.0.0
 
 jobs:
   test:
@@ -72,13 +70,9 @@ jobs:
         run: python3 -m pip install setuptools
       - run: npm install
       - run: ${{ env.NODE_BUILD_CMD }}
-      - run: ${{ env.ELECTRON_BUILD_CMD }}
       - if: matrix.os == 'windows-2019'
         run: |
           ${{ env.NODE_BUILD_CMD }} --arch ia32
-          ${{ env.NO_V18_NODE_BUILD_CMD }} --arch arm64
-          ${{ env.ELECTRON_BUILD_CMD }} --arch ia32
-          ${{ env.ELECTRON_BUILD_CMD }} --arch arm64
       - name: Archive prebuilds
         run: tar -czf prebuilds-${{ matrix.os }}.tar.gz prebuilds/
       - name: Upload prebuilds
