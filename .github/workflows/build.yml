@@ -37,7 +37,7 @@ jobs:
         run: brew install python-setuptools
       - if: ${{ !startsWith(matrix.os, 'windows') && !startsWith(matrix.os, 'macos') }}
         run: python3 -m pip install setuptools
-      - run: npm install --ignore-scripts
+      - run: npm install
       - run: npm run build-debug
       - run: npm test
       - name: Test SpatiaLite extension
@@ -70,7 +70,7 @@ jobs:
         run: brew install python-setuptools
       - if: ${{ !startsWith(matrix.os, 'windows') && !startsWith(matrix.os, 'macos') }}
         run: python3 -m pip install setuptools
-      - run: npm install --ignore-scripts
+      - run: npm install
       - run: ${{ env.NODE_BUILD_CMD }}
       - run: ${{ env.ELECTRON_BUILD_CMD }}
       - if: matrix.os == 'windows-2019'
