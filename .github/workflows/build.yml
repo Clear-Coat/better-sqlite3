@@ -7,8 +7,8 @@ on:
   workflow_dispatch: {}
 
 env:
-  NODE_BUILD_CMD: prebuildify --napi --strip --targets 18.0.0,20.0.0,22.0.0
-  NO_V18_NODE_BUILD_CMD: prebuildify --napi --strip --targets 20.0.0,22.0.0
+  NODE_BUILD_CMD: npm run prebuildify --targets 18.0.0,20.0.0,22.0.0
+  NO_V18_NODE_BUILD_CMD: npm run prebuildify --targets 20.0.0,22.0.0
 
 jobs:
   # test:
