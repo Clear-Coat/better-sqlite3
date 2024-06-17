@@ -1,6 +1,6 @@
 {
   "name": "@clear-coat/better-sqlite3",
-  "version": "11.1.3",
+  "version": "11.1.4",
   "description": "The fastest and simplest library for SQLite3 in Node.js.",
   "homepage": "http://github.com/Clear-Coat/better-sqlite3",
   "author": "Joshua Wise <joshuathomaswise@gmail.com>",
@@ -40,7 +40,7 @@
     "benchmark": "node benchmark",
     "download": "bash ./deps/download.sh",
     "lzz": "lzz -hx hpp -sx cpp -k BETTER_SQLITE3 -d -hl -sl -e ./src/better_sqlite3.lzz",
-    "prebuildify": "prebuildify --napi --strip"
+    "prebuildify": "prebuildify --all --strip"
   },
   "license": "MIT",
   "keywords": [

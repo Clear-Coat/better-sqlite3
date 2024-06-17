@@ -68,7 +68,7 @@ jobs:
         run: brew install python-setuptools
       - if: ${{ !startsWith(matrix.os, 'windows') && !startsWith(matrix.os, 'macos') }}
         run: python3 -m pip install setuptools
-      - run: npm install
+      - run: npm install --ignore-scripts
       - run: ${{ env.NODE_BUILD_CMD }}
       - name: Archive prebuilds - windows
         if: ${{ startsWith(matrix.os, 'windows') }}
@@ -137,6 +137,7 @@ jobs:
           tar --overwrite -xzf prebuilds/prebuilds-macos-14/prebuilds-macos-14.tar.gz -C ./
           unzip -o prebuilds/prebuilds-windows-2019/prebuilds-windows-2019.zip -d ./
           tar --overwrite -xzf prebuilds/prebuilds-linux-arm64/prebuilds-linux-arm64.tar.gz -C ./
+          rm -rf prebuilds/prebuilds-ubuntu-20.04 prebuilds/prebuilds-macos-latest prebuilds/prebuilds-macos-14 prebuilds/prebuilds-windows-2019 prebuilds/prebuilds-linux-arm64
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
