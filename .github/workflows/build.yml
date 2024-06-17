@@ -131,10 +131,10 @@ jobs:
         run: ls -la prebuilds/prebuilds-ubuntu-20.04
       - name: Unzip files
         run: |
-          echo "A" | tar -xzf prebuilds/prebuilds-ubuntu-20.04/prebuilds-ubuntu-20.04.tar.gz -C ./
-          echo "A" | tar -xzf prebuilds/prebuilds-macos-latest/prebuilds-macos-latest.tar.gz -C ./
-          echo "A" | tar -xzf prebuilds/prebuilds-macos-14/prebuilds-macos-14.tar.gz -C ./
-          unzip prebuilds/prebuilds-windows-2019/prebuilds-windows-2019.zip -d ./
+          tar --overwrite -xzf prebuilds/prebuilds-ubuntu-20.04/prebuilds-ubuntu-20.04.tar.gz -C ./
+          tar --overwrite -xzf prebuilds/prebuilds-macos-latest/prebuilds-macos-latest.tar.gz -C ./
+          tar --overwrite -xzf prebuilds/prebuilds-macos-14/prebuilds-macos-14.tar.gz -C ./
+          unzip -o prebuilds/prebuilds-windows-2019/prebuilds-windows-2019.zip -d ./
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
