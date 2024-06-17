@@ -5,6 +5,9 @@
 # ===
 
 {
+      'variables' : {
+    'openssl_fips': '',
+},
   'includes': ['common.gypi'],
   'targets': [
     {
