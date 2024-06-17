@@ -51,5 +51,8 @@
     "aggregate functions",
     "window functions",
     "database"
-  ]
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
 }
