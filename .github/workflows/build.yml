@@ -8,7 +8,6 @@ on:
 
 env:
   NODE_BUILD_CMD: npm run prebuildify
-  NO_V18_NODE_BUILD_CMD: npm run prebuildify
 
 jobs:
   # test:
@@ -71,10 +70,9 @@ jobs:
         run: python3 -m pip install setuptools
       - run: npm install
       - run: ${{ env.NODE_BUILD_CMD }}
-      - run: ${{ env.NO_V18_NODE_BUILD_CMD }}
       - name: Archive prebuilds
         if: ${{ startsWith(matrix.os, 'windows') }}
-        run: tar -czf prebuilds-${{ matrix.os }}.tar.gz ".\\prebuilds\\"
+        run: tar -czf prebuilds-${{ matrix.os }}.tar.gz prebuilds\\
       - name: Archive prebuilds
         if: ${{ !startsWith(matrix.os, 'windows') }}
         run: tar -czf prebuilds-${{ matrix.os }}.tar.gz prebuilds/
