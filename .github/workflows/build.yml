@@ -70,10 +70,10 @@ jobs:
         run: python3 -m pip install setuptools
       - run: npm install
       - run: ${{ env.NODE_BUILD_CMD }}
-      - name: Archive prebuilds
+      - name: Archive prebuilds - windows
         if: ${{ startsWith(matrix.os, 'windows') }}
-        run: tar -czf prebuilds-${{ matrix.os }}.tar.gz prebuilds\\
-      - name: Archive prebuilds
+        run: Compress-Archive -Path ./prebuilds -DestinationPath prebuilds-${{ matrix.os }}.zip
+      - name: Archive prebuilds - non-windows
         if: ${{ !startsWith(matrix.os, 'windows') }}
         run: tar -czf prebuilds-${{ matrix.os }}.tar.gz prebuilds/
       - name: Upload prebuilds
@@ -127,7 +127,7 @@ jobs:
           tar -xzf prebuilds/prebuilds-ubuntu-20.04.tar.gz -C ./
           tar -xzf prebuilds/prebuilds-macos-latest.tar.gz -C ./
           tar -xzf prebuilds/prebuilds-macos-14.tar.gz -C ./
-          tar -xzf prebuilds/prebuilds-windows-2019.tar.gz -C ./
+          unzip prebuilds/prebuilds-windows-2019.zip -d ./
           tar -xzf prebuilds/prebuilds-linux-arm/arm64.tar.gz -C ./
       - run: npm publish
         env:
