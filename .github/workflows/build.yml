@@ -8,6 +8,7 @@ on:
 
 env:
   NODE_BUILD_CMD: prebuildify --napi --strip --targets 18.0.0,20.0.0,22.0.0
+  NO_V18_NODE_BUILD_CMD: prebuildify --napi --strip --targets 20.0.0,22.0.0
 
 jobs:
   test:
@@ -70,6 +71,7 @@ jobs:
         run: python3 -m pip install setuptools
       - run: npm install
       - run: ${{ env.NODE_BUILD_CMD }}
+      - run: ${{ env.NO_V18_NODE_BUILD_CMD }} --arch arm64
       - if: matrix.os == 'windows-2019'
         run: |
           ${{ env.NODE_BUILD_CMD }} --arch ia32
@@ -82,7 +84,6 @@ jobs:
           path: prebuilds-${{ matrix.os }}.tar.gz
 
   prebuild-linux-arm:
-    if: ${{ github.event_name == 'release' }}
     strategy:
       fail-fast: false
       matrix:
