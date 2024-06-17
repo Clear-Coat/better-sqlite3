@@ -53,6 +53,7 @@ jobs:
           - ubuntu-20.04
           - macos-latest
           - macos-14
+          - macos-13
           - windows-2019
     name: Prebuild on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
@@ -135,9 +136,10 @@ jobs:
           tar --overwrite -xzf prebuilds/prebuilds-ubuntu-20.04/prebuilds-ubuntu-20.04.tar.gz -C ./
           tar --overwrite -xzf prebuilds/prebuilds-macos-latest/prebuilds-macos-latest.tar.gz -C ./
           tar --overwrite -xzf prebuilds/prebuilds-macos-14/prebuilds-macos-14.tar.gz -C ./
+          tar --overwrite -xzf prebuilds/prebuilds-macos-13/prebuilds-macos-13.tar.gz -C ./
           unzip -o prebuilds/prebuilds-windows-2019/prebuilds-windows-2019.zip -d ./
           tar --overwrite -xzf prebuilds/prebuilds-linux-arm64/prebuilds-linux-arm64.tar.gz -C ./
-          rm -rf prebuilds/prebuilds-ubuntu-20.04 prebuilds/prebuilds-macos-latest prebuilds/prebuilds-macos-14 prebuilds/prebuilds-windows-2019 prebuilds/prebuilds-linux-arm64
+          rm -rf prebuilds/prebuilds-ubuntu-20.04 prebuilds/prebuilds-macos-latest prebuilds/prebuilds-macos-14 prebuilds/prebuilds-windows-2019 prebuilds/prebuilds-linux-arm64 prebuilds/prebuilds-macos-13
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
