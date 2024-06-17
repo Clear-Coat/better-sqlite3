@@ -128,7 +128,10 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           path: ./prebuilds
-      - run: |
+      - name: List prebuilds directory
+        run: ls -la prebuilds
+      - name: Unzip files
+        run: |
           tar -xzf prebuilds/prebuilds-ubuntu-20.04.tar.gz -C ./
           tar -xzf prebuilds/prebuilds-macos-latest.tar.gz -C ./
           tar -xzf prebuilds/prebuilds-macos-14.tar.gz -C ./
