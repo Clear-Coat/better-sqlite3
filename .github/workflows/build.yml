@@ -77,12 +77,12 @@ jobs:
         if: ${{ !startsWith(matrix.os, 'windows') }}
         run: tar -czf prebuilds-${{ matrix.os }}.tar.gz prebuilds/
       - name: Upload prebuilds - tar
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: prebuilds-${{ matrix.os }}
           path: prebuilds-${{ matrix.os }}.tar.gz
       - name: Upload prebuilds - zip
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: prebuilds-${{ matrix.os }}
           path: prebuilds-${{ matrix.os }}.zip
@@ -108,7 +108,7 @@ jobs:
       - name: Archive prebuilds
         run: tar -czf prebuilds-linux-${{ matrix.arch }}.tar.gz prebuilds/
       - name: Upload prebuilds
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: prebuilds-linux-${{ matrix.arch }}
           path: prebuilds-linux-${{ matrix.arch }}.tar.gz
@@ -126,7 +126,7 @@ jobs:
           node-version: 18
           registry-url: https://npm.pkg.github.com
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           path: ./prebuilds
       - name: List prebuilds directory
