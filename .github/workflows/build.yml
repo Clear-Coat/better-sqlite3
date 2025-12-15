@@ -50,7 +50,6 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - ubuntu-20.04
           - macos-latest
           - macos-14
           - windows-2019
@@ -115,7 +114,7 @@ jobs:
 
   publish:
     name: Publishing to NPM
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     needs:
       - prebuild
       - prebuild-linux-arch
@@ -133,13 +132,12 @@ jobs:
         run: ls -la prebuilds/
       - name: Unzip files
         run: |
-          tar --overwrite -xzf prebuilds/prebuilds-ubuntu-20.04/prebuilds-ubuntu-20.04.tar.gz -C ./
           tar --overwrite -xzf prebuilds/prebuilds-macos-latest/prebuilds-macos-latest.tar.gz -C ./
           tar --overwrite -xzf prebuilds/prebuilds-macos-14/prebuilds-macos-14.tar.gz -C ./
           unzip -o prebuilds/prebuilds-windows-2019/prebuilds-windows-2019.zip -d ./
           tar --overwrite -xzf prebuilds/prebuilds-linux-arm64/prebuilds-linux-arm64.tar.gz -C ./
           tar --overwrite -xzf prebuilds/prebuilds-linux-amd64/prebuilds-linux-amd64.tar.gz -C ./
-          rm -rf prebuilds/prebuilds-ubuntu-20.04 prebuilds/prebuilds-macos-latest prebuilds/prebuilds-macos-14 prebuilds/prebuilds-windows-2019 prebuilds/prebuilds-linux-arm64 prebuilds/prebuilds-linux-amd64
+          rm -rf prebuilds/prebuilds-macos-latest prebuilds/prebuilds-macos-14 prebuilds/prebuilds-windows-2019 prebuilds/prebuilds-linux-arm64 prebuilds/prebuilds-linux-amd64
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
